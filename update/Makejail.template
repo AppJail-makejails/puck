@@ -1,0 +1,37 @@
+ARG puck_file
+ARG puck_output=${APPJAIL_PWD}
+ARG puck_nostop?
+ARG puck_ajspec=gh+AppJail-makejails/puck
+ARG puck_tag=%%TAG1%%
+
+OPTION start
+OPTION overwrite=force
+OPTION alias
+OPTION ip4_disable
+OPTION ip6_disable
+OPTION noresolv_conf
+OPTION notzdata
+OPTION ephemeral
+OPTION mount_devfs
+OPTION device=include \$devfsrules_hide_all
+OPTION device=include \$devfsrules_unhide_basic
+OPTION device=include \$devfsrules_unhide_login
+OPTION template=template.conf
+
+INCLUDE gh+DtxdF/efficient-makejail
+
+FROM --entrypoint "${puck_ajspec}" puck:${puck_tag}
+
+COPY scripts
+
+CMD mkdir -p /data
+
+COPY ${puck_file} /data/file.pdf
+
+RUN /scripts/run.sh
+
+CMD --local-jaildir cp -a data/file.trusted.pdf "${puck_output}"
+
+RAW if [ -z "${puck_nostop}" ]; then
+        STOP
+RAW fi

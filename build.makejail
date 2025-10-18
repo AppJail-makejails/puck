@@ -1,0 +1,25 @@
+OPTION start
+OPTION overwrite=force
+OPTION resolv_conf
+OPTION tzdata
+
+PKG python \
+    py311-click \
+    py311-pillow \
+    py311-tqdm \
+    shrinkpdf \
+    GraphicsMagick-nox11 \
+    poppler-utils \
+    su-exec-static
+
+CMD mkdir -p /pdfconverter
+CMD fetch -o /pdfconverter/server.py \
+        https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/server.py
+CMD fetch -o /pdfconverter/client.py \
+        https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/client.py
+COPY patches/client.py.patch /pdfconverter
+COPY patches/server.py.patch /pdfconverter
+CMD (cd /pdfconverter; patch < client.py.patch)
+CMD (cd /pdfconverter; patch < server.py.patch)
+CMD rm -f /pdfconverter/*.orig /pdfconverter/*.patch
+CMD chmod +x /pdfconverter/client.py /pdfconverter/server.py
