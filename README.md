@@ -26,7 +26,7 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 * `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
 * `puck_nostop` (optional): Don't stop the jail.
 * `puck_ajspec` (default: `gh+AppJail-makejails/puck`): Entry point where the `appjail-ajspec(5)` file is located.
-* `puck_tag` (default: `13.5`): see [#tags](#tags).
+* `puck_tag` (default: `14.3`): see [#tags](#tags).
 
 ### Environment
 
@@ -40,5 +40,5 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 
 | Tag           | Arch    | Version            | Type   |
 | ------------- | --------| ------------------ | ------ |
-| `13.5`    | `amd64` | `13.5-RELEASE` | `thin` |
 | `14.3`    | `amd64` | `14.3-RELEASE` | `thin` |
+| `15`    | `amd64` | `15` | `thin` |

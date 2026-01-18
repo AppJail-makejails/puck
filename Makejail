@@ -2,7 +2,7 @@ ARG puck_file
 ARG puck_output=${APPJAIL_PWD}
 ARG puck_nostop?
 ARG puck_ajspec=gh+AppJail-makejails/puck
-ARG puck_tag=13.5
+ARG puck_tag=14.3
 
 OPTION start
 OPTION overwrite=force
