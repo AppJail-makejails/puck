@@ -1,7 +1,7 @@
 ARG puck_file
 ARG puck_output=${APPJAIL_PWD}
 ARG puck_nostop?
-ARG puck_from=ghcr.io/AppJail-makejails/puck
+ARG puck_from=ghcr.io/appjail-makejails/puck
 ARG puck_tag=latest
 
 OPTION start
