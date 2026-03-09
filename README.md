@@ -25,8 +25,8 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 * `puck_file` (mandatory): Suspicious PDF file.
 * `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
 * `puck_nostop` (optional): Don't stop the jail.
-* `puck_ajspec` (default: `gh+AppJail-makejails/puck`): Entry point where the `appjail-ajspec(5)` file is located.
-* `puck_tag` (default: `14.3`): see [#tags](#tags).
+* `puck_from` (default: `ghcr.io/AppJail-makejails/puck`): Location of OCI image. See also [OCI Configuration](#oci-configuration).
+* `puck_tag` (default: `latest`): OCI image tag. See also [OCI Configuration](#oci-configuration).
 
 ### Environment
 
@@ -36,9 +36,15 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 * `PUCK_COMPRESSION_WITH_GRAYSCALE` (default: `0`): Enable grayscale conversion which can further reduce output size.
 * `PUCK_COMPRESSION_RESOLUTION` (default: `72`): Resolution in DPI.
 
-## Tags
+## OCI Configuration
 
-| Tag           | Arch    | Version            | Type   |
-| ------------- | --------| ------------------ | ------ |
-| `14.3`    | `amd64` | `14.3-RELEASE` | `thin` |
-| `15`    | `amd64` | `15` | `thin` |
+```yaml
+build:
+  variants:
+    - tag: 15.0
+      containerfile: Containerfile.pkg
+      aliases: ["latest"]
+      default: true
+      args:
+        FREEBSD_RELEASE: "15.0"
+```

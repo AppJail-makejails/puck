@@ -1,0 +1,16 @@
+name: Build OCI image for %%IMAGE_NAME%%
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['*.md', 'LICENSE', '.gitignore']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: appjail-makejails/workflows/.github/workflows/daemonless-build.yaml@main
+    with:
+      image_name: %%IMAGE_NAME%%
+    secrets: inherit

@@ -1,8 +1,8 @@
 ARG puck_file
 ARG puck_output=${APPJAIL_PWD}
 ARG puck_nostop?
-ARG puck_ajspec=gh+AppJail-makejails/puck
-ARG puck_tag=14.3
+ARG puck_from=ghcr.io/AppJail-makejails/puck
+ARG puck_tag=latest
 
 OPTION start
 OPTION overwrite=force
@@ -17,10 +17,7 @@ OPTION device=include \$devfsrules_hide_all
 OPTION device=include \$devfsrules_unhide_basic
 OPTION device=include \$devfsrules_unhide_login
 OPTION template=template.conf
-
-INCLUDE gh+DtxdF/efficient-makejail
-
-FROM --entrypoint "${puck_ajspec}" puck:${puck_tag}
+OPTION from=${puck_from}:${puck_tag}
 
 COPY scripts
 
