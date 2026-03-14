@@ -25,7 +25,7 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 * `puck_file` (mandatory): Suspicious PDF file.
 * `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
 * `puck_nostop` (optional): Don't stop the jail.
-* `puck_from` (default: `ghcr.io/AppJail-makejails/puck`): Location of OCI image. See also [OCI Configuration](#oci-configuration).
+* `puck_from` (default: `ghcr.io/appjail-makejails/puck`): Location of OCI image. See also [OCI Configuration](#oci-configuration).
 * `puck_tag` (default: `latest`): OCI image tag. See also [OCI Configuration](#oci-configuration).
 
 ### Environment
