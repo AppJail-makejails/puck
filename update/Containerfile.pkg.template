@@ -1,6 +1,6 @@
 ARG FREEBSD_RELEASE
 
-FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
+FROM ghcr.io/appjail-makejails/base:${FREEBSD_RELEASE}
 
 LABEL org.opencontainers.image.title="Puck" \
     org.opencontainers.image.description="Convert untrusted PDF files into trusted ones" \
@@ -10,29 +10,9 @@ LABEL org.opencontainers.image.title="Puck" \
     org.opencontainers.image.vendor="DtxdF" \
     org.opencontainers.image.authors="Jesús Daniel Colmenares Oviedo <dtxdf@disroot.org>"
 
-ENV ASSUME_ALWAYS_YES=yes
-
 WORKDIR /pdfconverter
 
-RUN mkdir -p /etc/pkg && \
-    printf '%s\n' \
-      'FreeBSD-ports-kmods: { enabled: no }' \
-      'FreeBSD-base: {' \
-      '  url: "pkg+https://pkg.FreeBSD.org/${ABI}/base_release_${VERSION_MINOR}",' \
-      '  mirror_type: "srv",' \
-      '  signature_type: "fingerprints",' \
-      '  fingerprints: "/usr/share/keys/pkgbase-${VERSION_MAJOR}",' \
-      '  enabled: yes' \
-      '}' \
-      'FreeBSD-Ports: {' \
-      '  url: "pkg+https://pkg.FreeBSD.org/${ABI}/latest",' \
-      '  mirror_type: "srv",' \
-      '  signature_type: "fingerprints",' \
-      '  fingerprints: "/usr/share/keys/pkg",' \
-      '  enabled: yes' \
-      '}' > /etc/pkg/FreeBSD.conf && \
-    rm -rf /usr/local/etc/pkg && \
-	pkg update && \
+RUN pkg update && \
     pkg install -y FreeBSD-utilities python py%%PYVER%%-click py%%PYVER%%-pillow py%%PYVER%%-tqdm shrinkpdf GraphicsMagick-nox11 poppler-utils su-exec-static && \
     install -d -m 755 /usr/local/sbin && \
     pkg clean -a && \
