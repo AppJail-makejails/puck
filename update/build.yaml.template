@@ -1,6 +1,8 @@
 name: Build OCI image for %%IMAGE_NAME%%
 
 on:
+  schedule:
+    - cron: '0 0 21 * *'
   push:
     branches: [main]
     paths-ignore: ['*.md', 'LICENSE', '.gitignore']
@@ -14,3 +16,10 @@ jobs:
     with:
       image_name: %%IMAGE_NAME%%
     secrets: inherit
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@v1
