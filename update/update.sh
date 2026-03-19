@@ -16,7 +16,6 @@ cat -- "${BASEDIR}/config.yaml.template" |\
 
 cat -- "${BASEDIR}/README.md.template" |\
     sed -E \
-        -e "s/%%TAG1%%/${TAG1}/g" \
         -e "s/%%IMAGE_NAME%%/${IMAGE_NAME}/g" \
         -e "/%%OCI_CONFIGURATION%%/{ 
             r ${BASEDIR}/../.daemonless/config.yaml
