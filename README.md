@@ -13,6 +13,7 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 ```console
 # appjail makejail \
     -f gh+AppJail-makejails/puck \
+    -o container="args:--pull" \
     -- \
     --puck_file /path/to/your/suspicious/file.pdf
 ...
