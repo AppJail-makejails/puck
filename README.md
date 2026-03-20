@@ -48,4 +48,5 @@ build:
       default: true
       args:
         FREEBSD_RELEASE: "15.0"
+        PYTHON_VERSION: "311"
 ```

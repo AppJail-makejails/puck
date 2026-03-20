@@ -12,7 +12,8 @@ mkdir -p -- "${BASEDIR}/../.daemonless"
 
 cat -- "${BASEDIR}/config.yaml.template" |\
     sed -E \
-        -e "s/%%TAG1%%/${TAG1}/g" > "${BASEDIR}/../.daemonless/config.yaml"
+        -e "s/%%TAG1%%/${TAG1}/g" \
+        -e "s/%%PYVER%%/${PYVER}/g" > "${BASEDIR}/../.daemonless/config.yaml"
 
 cat -- "${BASEDIR}/README.md.template" |\
     sed -E \
@@ -27,7 +28,3 @@ mkdir -p -- "${BASEDIR}/../.github/workflows"
 cat -- "${BASEDIR}/build.yaml.template" |\
     sed -E \
         -e "s/%%IMAGE_NAME%%/${IMAGE_NAME}/g" > "${BASEDIR}/../.github/workflows/build.yaml"
-
-cat -- "${BASEDIR}/Containerfile.pkg.template" |\
-    sed -E \
-        -e "s/%%PYVER%%/${PYVER}/g" > "${BASEDIR}/../Containerfile.pkg"

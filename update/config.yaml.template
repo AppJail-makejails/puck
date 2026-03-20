@@ -6,3 +6,4 @@ build:
       default: true
       args:
         FREEBSD_RELEASE: "%%TAG1%%"
+        PYTHON_VERSION: "%%PYVER%%"
