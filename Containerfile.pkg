@@ -3,6 +3,8 @@ ARG PYTHON_VERSION
 
 FROM ghcr.io/appjail-makejails/python:${FREEBSD_RELEASE}-${PYTHON_VERSION}
 
+ARG PYTHON_VERSION
+
 LABEL org.opencontainers.image.title="Puck" \
     org.opencontainers.image.description="Convert untrusted PDF files into trusted ones" \
     org.opencontainers.image.source="https://github.com/AppJail-makejails/puck" \
