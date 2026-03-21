@@ -42,3 +42,7 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 ```yaml
 %%OCI_CONFIGURATION%%
 ```
+
+## Notes
+
+1. This Makejail includes [gh+AppJail-makejails/user-mapping](https://github.com/AppJail-makejails/user-mapping).

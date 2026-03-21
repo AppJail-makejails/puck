@@ -4,6 +4,8 @@ ARG puck_nostop?
 ARG puck_from=ghcr.io/appjail-makejails/puck
 ARG puck_tag=latest
 
+INCLUDE gh+AppJail-makejails/user-mapping
+
 OPTION start
 OPTION overwrite=force
 OPTION alias

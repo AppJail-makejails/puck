@@ -29,5 +29,4 @@ RUN patch < client.py.patch && \
     patch < server.py.patch && \
     rm -f *.patch *.orig && \
     sed -i '' -Ee "s/%%PYVER%%/${PYTHON_VERSION%${PYTHON_VERSION#?}}.${PYTHON_VERSION#?}/g" client.py server.py && \
-    chmod +x client.py server.py && \
-    chown nobody:nobody client.py server.py
+    chmod 0555 client.py server.py
