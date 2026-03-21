@@ -28,6 +28,6 @@ COPY patches/client.py.patch patches/server.py.patch .
 RUN patch < client.py.patch && \
     patch < server.py.patch && \
     rm -f *.patch *.orig && \
-    sed -i '' -Ee "s/%%PYVER%%/${PYTHON_VERSION}/g" client.py server.py && \
+    sed -i '' -Ee "s/%%PYVER%%/${PYTHON_VERSION%${PYTHON_VERSION#?}}.${PYTHON_VERSION#?}/g" client.py server.py && \
     chmod +x client.py server.py && \
     chown nobody:nobody client.py server.py

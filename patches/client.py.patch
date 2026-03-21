@@ -1,8 +1,8 @@
---- client.py.orig	2026-03-20 01:16:32.318489000 -0400
-+++ client.py	2026-03-20 01:16:25.416151000 -0400
+--- client.py.orig	2026-03-20 20:58:09.196719000 -0400
++++ client.py	2026-03-20 20:58:00.638112000 -0400
 @@ -1,4 +1,4 @@
 -#!/usr/bin/python3
-+#!/usr/bin/python%%PYVER%%
++#!/usr/bin/env python%%PYVER%%
  # -*- coding: utf-8 -*-
  
  # The Qubes OS Project, http://www.qubes-os.org

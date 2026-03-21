@@ -1,8 +1,8 @@
---- server.py.orig	2026-03-20 01:16:31.851621000 -0400
-+++ server.py	2026-03-20 01:13:56.076974000 -0400
+--- server.py.orig	2026-03-20 20:58:08.692808000 -0400
++++ server.py	2026-03-20 20:58:05.197860000 -0400
 @@ -1,4 +1,4 @@
 -#!/usr/bin/python3
-+#!/usr/bin/python%%PYVER%%
++#!/usr/bin/env python%%PYVER%%
  # -*- coding: utf-8 -*-
  
  # The Qubes OS Project, http://www.qubes-os.org
