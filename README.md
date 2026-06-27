@@ -21,34 +21,35 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 ...
 ```
 
-### Arguments
+### Arguments (stage: build)
 
-* `puck_file` (mandatory): Suspicious PDF file.
-* `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
-* `puck_nostop` (optional): Don't stop the jail.
 * `puck_from` (default: `ghcr.io/appjail-makejails/puck`): Location of OCI image. See also [OCI Configuration](#oci-configuration).
 * `puck_tag` (default: `latest`): OCI image tag. See also [OCI Configuration](#oci-configuration).
+* `puck_file` (mandatory): Suspicious PDF file.
+* `puck_nostop` (optional): Don't stop the jail.
+* `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
 
-### Environment
+### Environment (stage: build)
 
-* `PUCK_RESOLUTION` (default: `300`): Resolution of output.
 * `PUCK_BATCH` (default: `50`): Maximum number of conversion tasks.
 * `PUCK_COMPRESSION` (default: `1`): Enable compression. Set this environment variable to `0` to disable compression.
-* `PUCK_COMPRESSION_WITH_GRAYSCALE` (default: `0`): Enable grayscale conversion which can further reduce output size.
 * `PUCK_COMPRESSION_RESOLUTION` (default: `72`): Resolution in DPI.
+* `PUCK_COMPRESSION_WITH_GRAYSCALE` (default: `0`): Enable grayscale conversion which can further reduce output size.
+* `PUCK_RESOLUTION` (default: `300`): Resolution of output.
+
 
 ## OCI Configuration
 
 ```yaml
 build:
   variants:
-    - tag: 15.0
-      containerfile: Containerfile.pkg
+    - tag: 15.1
+      containerfile: Containerfile
       aliases: ["latest"]
       default: true
       args:
-        FREEBSD_RELEASE: "15.0"
-        PYTHON_VERSION: "311"
+        FREEBSD_RELEASE: "15.1"
+        PYVER: "312"
 ```
 
 ## Notes

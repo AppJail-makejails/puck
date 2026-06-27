@@ -1,9 +1,9 @@
 ARG FREEBSD_RELEASE
-ARG PYTHON_VERSION
+ARG PYVER
 
-FROM ghcr.io/appjail-makejails/python:${FREEBSD_RELEASE}-${PYTHON_VERSION}
+FROM ghcr.io/appjail-makejails/python:${FREEBSD_RELEASE}-${PYVER}
 
-ARG PYTHON_VERSION
+ARG PYVER
 
 LABEL org.opencontainers.image.title="Puck" \
     org.opencontainers.image.description="Convert untrusted PDF files into trusted ones" \
@@ -16,7 +16,7 @@ LABEL org.opencontainers.image.title="Puck" \
 WORKDIR /pdfconverter
 
 RUN pkg update && \
-    pkg install -y FreeBSD-utilities py${PYTHON_VERSION}-click py${PYTHON_VERSION}-pillow py${PYTHON_VERSION}-tqdm shrinkpdf GraphicsMagick-nox11 poppler-utils su-exec-static && \
+    pkg install -y FreeBSD-utilities py${PYVER}-click py${PYVER}-pillow py${PYVER}-tqdm shrinkpdf GraphicsMagick-nox11 poppler-utils su-exec-static && \
     install -d -m 755 /usr/local/sbin && \
     pkg clean -a && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
@@ -28,5 +28,5 @@ COPY patches/client.py.patch patches/server.py.patch .
 RUN patch < client.py.patch && \
     patch < server.py.patch && \
     rm -f *.patch *.orig && \
-    sed -i '' -Ee "s/%%PYVER%%/${PYTHON_VERSION%${PYTHON_VERSION#?}}.${PYTHON_VERSION#?}/g" client.py server.py && \
+    sed -i '' -Ee "s/%%PYVER%%/${PYVER%${PYVER#?}}.${PYVER#?}/g" client.py server.py && \
     chmod 0555 client.py server.py
