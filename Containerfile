@@ -17,7 +17,6 @@ WORKDIR /pdfconverter
 
 RUN pkg update && \
     pkg install -y FreeBSD-utilities py${PYVER}-click py${PYVER}-pillow py${PYVER}-tqdm shrinkpdf GraphicsMagick-nox11 poppler-utils su-exec-static && \
-    install -d -m 755 /usr/local/sbin && \
     pkg clean -a && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/server.py && \
