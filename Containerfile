@@ -4,6 +4,7 @@ ARG PYVER
 FROM ghcr.io/appjail-makejails/python:${FREEBSD_RELEASE}-${PYVER}
 
 ARG PYVER
+ARG NO_PKGCLEAN
 
 LABEL org.opencontainers.image.title="Puck" \
     org.opencontainers.image.description="Convert untrusted PDF files into trusted ones" \
@@ -15,11 +16,25 @@ LABEL org.opencontainers.image.title="Puck" \
 
 WORKDIR /pdfconverter
 
-RUN pkg update && \
-    pkg install -y FreeBSD-utilities py${PYVER}-click py${PYVER}-pillow py${PYVER}-tqdm shrinkpdf GraphicsMagick-nox11 poppler-utils su-exec-static && \
-    pkg clean -a && \
-    rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
-    fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/server.py && \
+RUN set -xe; \
+    \
+    pkg update; \
+    pkg install -U \
+        FreeBSD-utilities \
+        py${PYVER}-click \
+        py${PYVER}-pillow \
+        py${PYVER}-tqdm \
+        shrinkpdf \
+        GraphicsMagick-nox11 \
+        poppler-utils \
+        su-exec-static; \
+    \
+    if [ -z "${NO_PKGCLEAN}" ]; then \
+        pkg clean -a; \
+        rm -rf /var/cache/pkg/* /var/db/pkg/repos/*; \
+    fi \
+    \
+    fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/server.py; \
     fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/client.py
 
 COPY patches/client.py.patch patches/server.py.patch .

@@ -29,6 +29,10 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
 * `puck_nostop` (optional): Don't stop the jail.
 * `puck_output` (default: `${APPJAIL_PWD}`): Output file or directory. The current directory is used by default.
 
+### Environment (OCI image)
+
+* `PGID` (default: `1000`): Equivalent to `PUID` but for the Process Group ID.
+* `PUID` (default: `1000`): Process User ID for the container's main process, allowing you to match the owner of files written to mounted host volumes to your host system's user. Writable volumes are changed based on this environment variable.
 ### Environment (stage: build)
 
 * `PUCK_BATCH` (default: `50`): Maximum number of conversion tasks.
@@ -50,8 +54,6 @@ build:
       args:
         FREEBSD_RELEASE: "15.1"
         PYVER: "312"
+        NO_PKGCLEAN: "1"
+      cache_dirs: ["pkgcache0:/var/cache/pkg"]
 ```
-
-## Notes
-
-1. This Makejail includes [gh+AppJail-makejails/user-mapping](https://github.com/AppJail-makejails/user-mapping).
