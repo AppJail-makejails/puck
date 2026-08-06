@@ -8,7 +8,7 @@ PUCK_COMPRESSION_RESOLUTION="${PUCK_COMPRESSION_RESOLUTION:-72}"
 
 cd /pdfconverter
 
-change_owner /data
+chown -R noroot:noroot /data
 
 su-exec noroot ./client.py -i \
     -b "${PUCK_BATCH}" \
