@@ -15,7 +15,9 @@ http://blog.invisiblethings.org/2013/02/21/converting-untrusted-pdfs-into-truste
     -f gh+AppJail-makejails/puck \
     -o container="args:--pull" \
     -- \
-    --puck_file /path/to/your/suspicious/file.pdf
+    --puck_file /path/to/your/suspicious/file.pdf \
+    --puid $(id -u) \
+    --pgid $(id -g)
 ...
 # xdg-open file.trusted.pdf
 ...
