@@ -210,3 +210,4 @@ __marimo__/
 /patches/server.py.orig
 /patches/client.py
 /patches/server.py
+/patches/wrkdir/

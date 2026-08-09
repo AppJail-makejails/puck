@@ -1,0 +1,21 @@
+--- ocr.py.orig	2026-08-09 00:26:11.159343000 -0400
++++ ocr.py	2026-08-09 00:28:47.262444000 -0400
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python3
++#!/usr/bin/env python
+ # -*- coding: utf-8 -*-
+ 
+ import importlib
+@@ -9,11 +9,7 @@
+ LANG_RE = re.compile(r"^[A-Za-z0-9_]+(?:\+[A-Za-z0-9_]+)*$")
+ 
+ TESSDATA_DIRS = (
+-    Path("/usr/share/tessdata"),
+-    Path("/usr/share/tesseract/tessdata"),
+-    Path("/usr/share/tesseract-ocr/tessdata"),
+-    Path("/usr/share/tesseract-ocr/4.00/tessdata"),
+-    Path("/usr/share/tesseract-ocr/5/tessdata"),
++    Path("/usr/local/share/tessdata"),
+ )
+ 
+ 

@@ -10,7 +10,7 @@ cd /pdfconverter
 
 chown -R noroot:noroot /data
 
-su-exec noroot ./client.py -i \
+su-exec noroot python file_client.py -i \
     -b "${PUCK_BATCH}" \
     -r "${PUCK_RESOLUTION}" \
     /data/file.pdf

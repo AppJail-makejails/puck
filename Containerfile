@@ -21,27 +21,42 @@ RUN set -xe; \
     pkg update; \
     pkg install -U \
         FreeBSD-utilities \
+        FreeBSD-pam \
+        FreeBSD-libmagic \
         py${PYVER}-click \
         py${PYVER}-pillow \
         py${PYVER}-tqdm \
+        py${PYVER}-python-magic \
         shrinkpdf \
         GraphicsMagick-nox11 \
         poppler-utils \
-        su-exec-static; \
+        su-exec-static \
+        libreoffice \
+        git-tiny \
+        tesseract \
+        tesseract-data \
+        py${PYVER}-pymupdf \
+        python; \
     \
     if [ -z "${NO_PKGCLEAN}" ]; then \
         pkg clean -a; \
         rm -rf /var/cache/pkg/*; \
     fi; \
-    rm -rf /var/db/pkg/repos/*; \
+    rm -rf /var/db/pkg/repos/*
+
+COPY patches/*.patch .
+
+RUN set -xe; \
     \
-    fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/server.py; \
-    fetch https://github.com/QubesOS/qubes-app-linux-pdf-converter/raw/refs/heads/main/qubespdfconverter/client.py
-
-COPY patches/client.py.patch patches/server.py.patch .
-
-RUN patch < client.py.patch && \
-    patch < server.py.patch && \
-    rm -f *.patch *.orig && \
-    sed -i '' -Ee "s/%%PYVER%%/${PYVER%${PYVER#?}}.${PYVER#?}/g" client.py server.py && \
-    chmod 0555 client.py server.py
+    umask 0022; \
+    \
+    git clone --depth 1 https://github.com/QubesOS/qubes-app-linux-pdf-converter; \
+    \
+    cp -a qubes-app-linux-pdf-converter/qubespdfconverter/ .; \
+    \
+    for patch in *.patch; do \
+        patch < "${patch}"; \
+    done; \
+    \
+    rm -rf qubes-app-linux-pdf-converter; \
+    rm -f *.patch *.orig
