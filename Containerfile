@@ -44,13 +44,15 @@ RUN set -xe; \
     fi; \
     rm -rf /var/db/pkg/repos/*
 
-COPY patches/*.patch .
+COPY patches/*.patch patches/CommitId .
 
 RUN set -xe; \
     \
     umask 0022; \
     \
-    git clone --depth 1 https://github.com/QubesOS/qubes-app-linux-pdf-converter; \
+    git clone https://github.com/QubesOS/qubes-app-linux-pdf-converter; \
+    COMMIT=`head -1 -- "CommitId"`; \
+    git -C qubes-app-linux-pdf-converter checkout "${COMMIT}"; \
     \
     cp -a qubes-app-linux-pdf-converter/qubespdfconverter/ .; \
     \
@@ -58,5 +60,5 @@ RUN set -xe; \
         patch < "${patch}"; \
     done; \
     \
-    rm -rf qubes-app-linux-pdf-converter; \
+    rm -rf qubes-app-linux-pdf-converter tests CommitId; \
     rm -f *.patch *.orig
