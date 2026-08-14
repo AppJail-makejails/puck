@@ -19,7 +19,7 @@ WORKDIR /pdfconverter
 RUN set -xe; \
     \
     pkg update; \
-    pkg install -U \
+    pkg install \
         FreeBSD-utilities \
         FreeBSD-pam \
         FreeBSD-libmagic \
